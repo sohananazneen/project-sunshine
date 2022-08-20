@@ -6,6 +6,11 @@ const ServiceDetail = () => {
     return (
         <div>
             <h2>Details: {serviceId}</h2>
+            <div className='text-center'>
+                <Link to="/enroll">
+                    <button className='btn btn-dark'>Enroll Now</button>
+                </Link>
+            </div>
         </div>
     );
 };
