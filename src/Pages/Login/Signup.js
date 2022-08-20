@@ -1,18 +1,34 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+
 const Signup = () => {
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
 
     const navigate = useNavigate();
+
+    const navigateSignin = () => {
+        navigate('/signin');
+    }
+
+    if (user) {
+        navigate('/home')
+    }
     const handleRegister = async (event) => {
         event.preventDefault();
         const name = event.target.name.value;
         const email = event.target.email.value;
         const password = event.target.password.value;
+        await createUserWithEmailAndPassword(email, password);
     }
-    const navigateSignin = () => {
-        navigate('/signin');
-    }
+
     return (
         <div className='container w-50 mx-auto'>
             <h2 className='text-center mt-2'>Please Sign Up</h2>
@@ -29,7 +45,10 @@ const Signup = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name="password" placeholder="Password" required />
                 </Form.Group>
-
+                <Button variant="primary w-50 mx-auto d-block mb-2" type="submit"
+                    value="Register">
+                    Sign Up
+                </Button>
             </Form>
 
 
