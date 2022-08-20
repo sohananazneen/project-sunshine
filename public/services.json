@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "img": "https://i.ibb.co/VN6ncHf/graphic-design.png",
+    "price": 14,
+    "name": "Graphic Design",
+    "description": "Graphic design principles, typography, & color mastery using Illustrator, InDesign, and Photoshop. For beginners & more! Learn and apply graphic design principles to produce effective designs in Photoshop, Illustrator, and InDesign."
+  },
+  {
+    "id": 2,
+    "img": "https://i.ibb.co/7QmjZRY/Autocad.jpg",
+    "price": 15,
+    "name": "AutoCad",
+    "description": "Learn AutoCAD by Creating Project We will cover 2D / 3D and You will be job ready after watching this course.Will be Confident to Work with AutoCAD. You will be Job Ready. Will be Confident to Create House Plans "
+  },
+  {
+    "id": 3,
+    "img": "https://i.ibb.co/d0b9byv/web-dev.webp",
+    "price": 12,
+    "name": " Web Developement",
+    "description": "Learn HTML5, CSS3, JavaScript, Python, Wagtail CMS, PHP & MySQL from scratch!Learn HTML5, CSS3, Vanilla JS (ES6+), Python, Wagtail CMS, PHP and MySQL all from scratch. Learn Python from beginner to advanced"
+  },
+  {
+    "id": 4,
+    "img": "https://i.ibb.co/LkCws3T/web-design.webp",
+    "price": 10,
+    "name": "Web Design",
+    "description": "Real World Coding in HTML & CSSLaunch a career as a web designer by learning HTML5, CSS3, responsive design, Sass and more. Launch a career as a web designer by learning HTML5, CSS3, responsive design, Sass with projects"
+  }
+]
