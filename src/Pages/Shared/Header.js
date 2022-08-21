@@ -30,7 +30,7 @@ const Header = () => {
                                 <>
                                     <Nav.Link onClick={handleSignOut}>Sign out</Nav.Link>
                                     <Navbar.Brand as={Link} to="/">
-                                        <h6>Signed in as:{user.displayName}</h6>
+                                        <h6>Signed in as: {user.displayName}</h6>
                                     </Navbar.Brand>
                                 </>
                                 :
