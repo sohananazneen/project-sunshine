@@ -1,9 +1,13 @@
 import React, { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Loading from '../Shared/Loading';
 import SocialLogin from './SocialLogin';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Signin = () => {
     const emailRef = useRef('');
     const passwordRef = useRef('');
@@ -11,18 +15,24 @@ const Signin = () => {
     const location = useLocation();
 
     let from = location.state?.from?.pathname || "/";
-
+    let errorElement;
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
 
+    if (loading || sending) {
+        return <Loading></Loading>
+    }
     if (user) {
         navigate(from, { replace: true });
     }
-
+    if (error) {
+        errorElement = <p className='text-danger'>Error: {error?.message}</p>
+    }
     const handleSubmit = event => {
         event.preventDefault();
         const email = emailRef.current.value;
@@ -31,6 +41,18 @@ const Signin = () => {
     }
     const navigateRegister = event => {
         navigate('/signup');
+    }
+
+    const resetPassword = async () => {
+        const email = emailRef.current.value;
+        if (email) {
+            await sendPasswordResetEmail(email);
+            toast('Sent email');
+        }
+        else {
+            toast('please enter your email address');
+        }
+
     }
     return (
         <div className='container w-50 mx-auto mt-4'>
@@ -46,12 +68,13 @@ const Signin = () => {
                     Sign In
                 </Button>
             </Form>
-            {/* {errorElement} */}
+            {errorElement}
 
             <p><Link to="/signup" className='text-primary pe-auto text-decoration-none' onClick={navigateRegister}> Creat an account</Link> </p>
 
-            {/* <p>Forget Password? <button className='btn btn-link text-primary pe-auto text-decoration-none' onClick={resetPassword}>Reset Password</button> </p> */}
+            <p>Forget Password? <button className='btn btn-link text-primary pe-auto text-decoration-none' onClick={resetPassword}>Reset Password</button> </p>
             <SocialLogin></SocialLogin>
+            <ToastContainer />
         </div>
     );
 };
